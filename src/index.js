@@ -1,48 +1,16 @@
-import { ApolloServer, gql } from 'apollo-server';
+import { ApolloServer } from 'apollo-server';
+import axios from 'axios';
+import { resolvers, typeDefs } from './graphql/schema';
 
 const server = new ApolloServer({
-    typeDefs: gql`
-        type Query {
-            user: User!
-            users: [User!]!
-        }
-
-        type User {
-            id: ID
-            name: String
-        }
-    `,
-    resolvers: {
-        Query: {
-            user: () => {
-                return {
-                    id: '12dsf123',
-                    name: 'Cristiano',
-                }
-            },
-            users: () => {
-                return [
-                    {
-                        id: '123456',
-                        name: 'Cristiano',
-                    },
-                    {
-                        id: '456789',
-                        name: 'Elenice',
-                    },
-                    {
-                        id: '789123',
-                        name: 'Cristiane',
-                    },
-                    {
-                        id: '123789',
-                        name: 'Bruno',
-                    },
-                ]
-            }
+    typeDefs,
+    resolvers,
+    context: () => {
+        return {
+            axios,
         }
     }
-});
+})
 
 server.listen(4003).then(({ url }) => {
     console.log(`Server listening on ${url}`);
