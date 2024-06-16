@@ -1,6 +1,6 @@
 
-const user = async (_, __, { axios }) => {
-    const user = await axios.get('http://localhost:3000/users/602');
+const user = async (_, { id }, { axios }) => {
+    const user = await axios.get(`http://localhost:3000/users/${id}`);
     return await user.data
 }
 
