@@ -1,7 +1,7 @@
-import fetch from "node-fetch"
+import fetch from 'node-fetch';
 
 export const context = () => {
-    return {
-        getusers: (path = '/') => fetch('http://localhost:3000/users' +path)
-    }
-}
+  return {
+    getUsers: (path = '/') => fetch('http://localhost:3000/users' + path)
+  };
+};
