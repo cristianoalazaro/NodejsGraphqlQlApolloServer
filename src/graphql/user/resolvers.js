@@ -1,12 +1,12 @@
-
-const user = async (_, { id }, { axios }) => {
-    const user = await axios.get(`http://localhost:3000/users/${id}`);
-    return await user.data
+const users = async (_, __, {getUsers}) => {
+    const users = await getUsers();
+    return users.json();
 }
 
-const users = async (_, __, { axios }) => {
-    const users = await axios.get('http://localhost:3000/users');
-    return await users.data
+const user = async (_, { id }, {getUsers}) => {
+    const response =  await getUsers('/' + id);
+    const user = await response.json();
+    return user;
 }
 
 export const userResolvers = {
