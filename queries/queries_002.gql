@@ -1,0 +1,19 @@
+query GET_USER($id: ID!) {
+  user(id: $id) {
+    id
+    firstName
+    lastName
+    userName
+    indexRef
+    createdAt
+  }
+}
+
+query GET_POST($id: ID!){
+  post(id: $id) {
+    id
+    title
+    body
+    indexRef
+  }
+}

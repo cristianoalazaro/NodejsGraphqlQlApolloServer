@@ -1,34 +1,19 @@
-const post = () => {
-    return {
-        id: 1,
-        title: 'A história dela',
-    }
+const post = async(_, { id }, { getPosts }) => {
+    const post = await getPosts('/' + id);
+    return await post.json();
 }
 
-const posts = () => {
-    return [
-        {
-            id: 1,
-            title: 'A história dela',
-        },
-        {
-            id: 2,
-            title: 'Era uma vez',
-        },
-        {
-            id: 3,
-            title: 'A longa trajetória',
-        },
-        {
-            id: 4,
-            title: 'Nós dois',
-        },
-    ]
+const posts = async(_, __, { getPosts }) => {
+    const posts = await getPosts();
+    return await posts.json();
 }
 
 export const postResolvers = {
     Query: {
         post,
         posts,
+    },
+    Post: {
+        unixTimestamp: () => Math.random()
     }
 }
